@@ -4,16 +4,16 @@
     {
         //check length & the 0's on the left
 
-        if (billId.Length < 6 || billId.Length > 13 )       
+        if (billId.Length < 6 || billId.Length > 13)
             return false;
-        
 
-        result = ValidateCheckDigit(billId);
-        firstChkDigit = ValidateCheckDigit(billId.Substring(0 , billId.length-1));
+
+        bool result = ValidateCheckDigit(billId);
+        bool firstChkDigit = ValidateCheckDigit(billId.Substring(0, billId.Length - 1));
 
         //return result==true && firstChkDigit==true;
         return result && firstChkDigit;
-       
+
 
     }
 
@@ -22,9 +22,9 @@
         //check length
         if (paymentId.Length < 6 || paymentId.Length > 13)
             return false;
-        
 
-        result = ValidateCheckDigit(billId + paymentId);
+
+        bool result = ValidateCheckDigit(billId + paymentId);
 
         return result;
     }
@@ -46,10 +46,12 @@
         {
             sum += Convert.ToInt32(reversedText[i].ToString()) * mulNumber;
 
-            if (mulNumber == 7)           
+            if (mulNumber == 7)
+            {
                 mulNumber = 2;
                 continue;
-            
+            }
+
             mulNumber++;
         }
 
@@ -57,24 +59,24 @@
         int res = 0;
 
         if (residual > 1)
-            res = Math.Abs(residual - 11);
-            result = res.Equals(checkDigit);
+        {
 
+            res = Math.Abs(residual - 11);
+            return res.Equals(checkDigit);
+        }
         else
         {
-            result = res.Equals(checkDigit);
+            return res.Equals(checkDigit);
         }
-
-        return result;
     }
 
 
     public bool Validate(Bill bill)
     {
         if (ValidateBillId(bill.BillId) == true && ValidatePaymentId(bill.PaymentId, bill.BillId) == true)
-            result = true;
-        
-        return result;
+            return true;
+        else
+            return false;
     }
 
 

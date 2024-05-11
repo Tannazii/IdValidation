@@ -4,6 +4,7 @@
     {
         public static void Main(String[] args)
         {
+            bool isValid = false;
             do
             {
                 Console.WriteLine("start");
@@ -19,13 +20,13 @@
 
                 BillService service = new BillService();
 
-                bool isvalid = service.Validate(billAp);
-                Console.WriteLine($" billId or paymentid is {isvalid} ");
+                isValid = service.Validate(billAp);
+                Console.WriteLine($" billId or paymentid is {isValid} ");
 
 
                 Console.WriteLine("end");
             }
-            while(isvalid=false);
+            while(isValid == false);
         }
     }
 }
