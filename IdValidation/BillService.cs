@@ -9,11 +9,8 @@
 
 
         bool result = ValidateCheckDigit(billId);
-        bool firstChkDigit = ValidateCheckDigit(billId.Substring(0, billId.Length - 1));
 
-        //return result==true && firstChkDigit==true;
-        return result && firstChkDigit;
-
+        return result ;
 
     }
 
@@ -25,8 +22,9 @@
 
 
         bool result = ValidateCheckDigit(billId + paymentId);
+        bool firstChkDigit = ValidateCheckDigit(paymentId.Substring(0, paymentId.Length - 1));
 
-        return result;
+        return result && firstChkDigit;
     }
 
 
